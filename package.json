@@ -7,7 +7,7 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "build": "tsc && node dist/index.js",
+    "build": "webpack --config ./webpack.config.ts --env mode=prod",
     "prod": "node ./dist/bundle.js",
     "dev": "nodemon",
     "test": "jest",
@@ -39,7 +39,9 @@
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "tslib": "^2.6.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "cross-env": "^7.0.3",

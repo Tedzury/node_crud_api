@@ -1,6 +1,3 @@
-import sayHi from './some';
-// "build": "webpack --config ./webpack.config.js --env mode=prod",
-// "dev": "webpack serve --open --config ./webpack.config.js --env mode=dev",
+import app from './app';
 
-console.log('Hello crud!');
-sayHi();
+app();

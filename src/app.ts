@@ -1,6 +1,7 @@
 import { IncomingMessage, createServer } from 'http';
 
 const app = () => {
+	console.log('newly builded!')
 	const getRequestInfo = (request: IncomingMessage) => {
 		let requestBody = '';
 

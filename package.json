@@ -7,9 +7,9 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "build": "webpack --config ./webpack.config.ts --env mode=prod",
-    "prod": "node ./dist/bundle.js",
-    "dev": "nodemon",
+    "start:prod": "webpack --config ./webpack.config.ts --env mode=prod && node ./dist/bundle.js",
+    "start:dev": "nodemon",
+    "start:multi": "nodemon -- --isMulti=true",
     "test": "jest",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format:fix": "prettier --write \"src/**/*.{ts}\""
@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "cross-env": "^7.0.3",
-    "dotenv": "^16.4.1"
+    "dotenv": "^16.4.1",
+    "uuid": "^9.0.1"
   }
 }

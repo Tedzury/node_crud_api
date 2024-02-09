@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start:prod": "webpack --config ./webpack.config.ts --env mode=prod && node ./dist/bundle.js",
-    "start:dev": "nodemon",
+    "start:dev": "cross-env nodemon",
     "start:multi": "nodemon -- --isMulti=true",
     "test": "jest",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

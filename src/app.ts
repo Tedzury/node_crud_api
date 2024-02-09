@@ -1,25 +1,49 @@
-import { IncomingMessage, createServer } from 'http';
+import isMulti from './helpers/isMulti';
+import getServer from './getServer';
+import getMasterServer from './getMasterServer';
+import cluster from 'cluster';
+import LoadBalancer from './utils/loadBalancer';
+import { createServer, request } from 'http';
+import dontenv from 'dotenv';
+import { INF_MSG } from './shared/constants'
+import {availableParallelism} from 'os';
+
+dontenv.config();
+
+const port = process.env.PORT || 4000;
+const isMultiple = isMulti(process.argv);
 
 const app = () => {
-	console.log('newly builded!')
-	const getRequestInfo = (request: IncomingMessage) => {
-		let requestBody = '';
 
-		console.log(request.url)
-		console.log(request.method)
-		request.on('data', (chunk) => {
-			requestBody += chunk;
-		});
-		request.on('end', () => {
-			console.log(requestBody ? JSON.parse(requestBody) : 'Body is empty');
-		})
-	}
+  if (cluster.isPrimary) {
+		console.log(INF_MSG.PRIM_PROC.replace('%pid%', process.pid.toString()));
 
-	const myServer = createServer((req, res) => {
-		getRequestInfo(req);
-	})
+    if (isMultiple) {
 
-	myServer.listen(4000)
+			console.log(INF_MSG.MASTER_SERVER.replace('%pid%', process.pid.toString()).replace('%port%', port.toString()));
+			
+			const maxWorkers = availableParallelism() - 1;
+			const loadBalancer = new LoadBalancer(Number(port), maxWorkers);
+			const masterServer = getMasterServer(loadBalancer);
+
+			masterServer.listen(port);
+
+      console.log(INF_MSG.CPU_AVAILABLE.replace('%numCPUs%', maxWorkers.toString()));
+
+      for (let i = 1; i < maxWorkers; i++) {
+        cluster.fork({ PORT: (Number(port) + i).toString() });
+      }
+
+    } else {
+      cluster.fork({ port: port });
+    }
+  } else {
+    const workerPort = process.env.PORT || port;
+		getServer(workerPort)
+		console.log(
+			INF_MSG.WORKER_START.replace('%pid%', process.pid.toString()).replace('%port%', workerPort.toString()),
+		);
+  }
 };
 
 export default app;

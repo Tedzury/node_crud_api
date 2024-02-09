@@ -6,23 +6,27 @@ const HTTP_METHODS = {
 };
 
 const HTTP_STATUS_CODES = {
-	OK: '200',
-	CREATED: '201',
-	BAD_REQUEST: '400',
-	NOT_FOUND: '404',
-	SERVER_ERROR: '500',
+	OK: 200,
+	CREATED: 201,
+	BAD_REQUEST: 400,
+	NOT_FOUND: 404,
+	WRONG_METHOD: 405,
+	SERVER_ERROR: 500,
 };
-
-const POSSIBLE_ROUTES = {
-	USERS: 'api/users',
-	USER: 'api/users/'
-}
 
 const INF_MSG = {
 	PRIM_PROC: 'Primary process %pid% is running',
 	MASTER_SERVER: 'Master server %pid% started. Server running at http://localhost:%port%/',
 	CPU_AVAILABLE: 'Current system has %numCPUs% CPU cores available.',
-	WORKER_START: 'Worker %pid% started. Server running at http://localhost:%port%/'
+	WORKER_START: 'Worker %pid% started. Server running at http://localhost:%port%/',
+	REQUEST_REDIRECT: 'Redirecting request to the server at %port% port',
+	WORKER_HANDLES: 'Server at http://localhost:%port%/ handles request!',
 }
 
-export { HTTP_METHODS, HTTP_STATUS_CODES, POSSIBLE_ROUTES, INF_MSG }
+const RESP_MSG = {
+	SERVER_ERROR: 'Internal server error happened. We are trying to figure out what have caused it.',
+	WRONG_METHOD: 'Such methods are not allowed while working with server. Only GET, POST, PUT and DELETE methods are allowed.',
+	INVALID_ROUTE: 'You are trying to reach route that doesn\'t exist. Try to use /api/users route.'
+}
+
+export { HTTP_METHODS, HTTP_STATUS_CODES, INF_MSG, RESP_MSG }

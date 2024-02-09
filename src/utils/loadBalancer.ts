@@ -15,7 +15,7 @@ class LoadBalancer {
 		if (this._currPort + 1 >= this._maxPorts) {
 			this._currPort = this._masterServerPort + 1;
 		} else {
-			this._currPort++
+			this._currPort = this._currPort + 1;
 		}
 	};
 };

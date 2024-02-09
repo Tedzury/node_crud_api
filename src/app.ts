@@ -3,10 +3,9 @@ import getServer from './getServer';
 import getMasterServer from './getMasterServer';
 import cluster from 'cluster';
 import LoadBalancer from './utils/loadBalancer';
-import { createServer, request } from 'http';
 import dontenv from 'dotenv';
 import { INF_MSG } from './shared/constants'
-import {availableParallelism} from 'os';
+import { availableParallelism } from 'os';
 
 dontenv.config();
 
@@ -21,8 +20,9 @@ const app = () => {
     if (isMultiple) {
 
 			console.log(INF_MSG.MASTER_SERVER.replace('%pid%', process.pid.toString()).replace('%port%', port.toString()));
-			
-			const maxWorkers = availableParallelism() - 1;
+
+			// const maxWorkers = availableParallelism() - 1;
+			const maxWorkers = 4;
 			const loadBalancer = new LoadBalancer(Number(port), maxWorkers);
 			const masterServer = getMasterServer(loadBalancer);
 

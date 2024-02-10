@@ -6,6 +6,7 @@ import LoadBalancer from './utils/loadBalancer';
 import dontenv from 'dotenv';
 import { INF_MSG } from './shared/constants'
 import { availableParallelism } from 'os';
+import database from './shared/dataBase';
 
 dontenv.config();
 

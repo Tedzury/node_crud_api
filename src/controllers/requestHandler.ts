@@ -1,6 +1,8 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import wrappedResponse from './utils/wrappedResponse';
-import { HTTP_STATUS_CODES, RESP_MSG, HTTP_METHODS, INF_MSG } from './shared/constants';
+import wrappedResponse from '../utils/wrappedResponse';
+import { HTTP_STATUS_CODES, RESP_MSG, HTTP_METHODS, INF_MSG } from '../shared/constants';
+import requestHandlerGet from './requestHandlerGet';
+import requestHandlerPost from './requestHandlerPost';
 
 const requestHandler = (_request: IncomingMessage, _response: ServerResponse, port: number | string) => {
 	try {
@@ -24,8 +26,20 @@ const requestHandler = (_request: IncomingMessage, _response: ServerResponse, po
 		});
 		_request.on('end', () => {
 			const parsedBody = (requestBody ? JSON.parse(requestBody) : null);
-			console.log(parsedBody);
-			return wrappedResponse(_response, HTTP_STATUS_CODES.OK, { message: 'Polet normalniy!'})
+			switch(method) {
+				case HTTP_METHODS.PUT: {
+					return wrappedResponse(_response, HTTP_STATUS_CODES.OK, { message: 'Polet normalniy!'});
+				}
+				case HTTP_METHODS.POST: {
+					return requestHandlerPost(_response, parsedUrl, parsedBody)
+				}
+				case HTTP_METHODS.DELETE: {
+					return wrappedResponse(_response, HTTP_STATUS_CODES.OK, { message: 'Polet normalniy!'});
+				}
+				default: {
+					return requestHandlerGet(_response, parsedUrl)
+				}
+			}
 		})
 	} catch(err) {
 		console.log(err)

@@ -1,5 +1,5 @@
 import { createServer } from 'http';
-import requestHandler from './requestHandler';
+import requestHandler from './controllers/requestHandler';
 
 const getServer = (port: number | string) => {
 

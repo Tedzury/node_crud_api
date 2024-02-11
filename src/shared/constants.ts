@@ -30,7 +30,8 @@ const RESP_MSG = {
 	INVALID_ID: 'You are trying to reach user with invalid ID.',
 	USER_NOT_FOUND: 'User with provided ID: %id% doesn\'t exist in database. Check provided ID;',
 	INVALID_JSON: 'You are trying to pass and invalid JSON in your request. Don\'t do that!',
-	INVALID_USER_FORMAT: 'The user you are trying to pass are not valid. User object must look like: { username: "Timmy", age: 15, hobbies: ["volleyball"]. }'
+	INVALID_USER_FORMAT: 'The user you are trying to pass are not valid. User object must look like: { username: "Timmy", age: 15, hobbies: ["volleyball"]. }',
+	NO_ID_PROVIDED: 'You must provide estimated user ID in the route in following way: /api/users/{userID}',
 }
 
 const DB_METHODS = {

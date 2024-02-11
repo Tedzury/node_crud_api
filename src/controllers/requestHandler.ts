@@ -3,6 +3,7 @@ import wrappedResponse from '../utils/wrappedResponse';
 import { HTTP_STATUS_CODES, RESP_MSG, HTTP_METHODS, INF_MSG } from '../shared/constants';
 import requestHandlerGet from './requestHandlerGet';
 import requestHandlerPost from './requestHandlerPost';
+import requestHandlerPut from './requestHandlerPut';
 
 const requestHandler = (_request: IncomingMessage, _response: ServerResponse, port: number | string) => {
 	try {
@@ -27,7 +28,7 @@ const requestHandler = (_request: IncomingMessage, _response: ServerResponse, po
 		_request.on('end', () => {
 			switch(method) {
 				case HTTP_METHODS.PUT: {
-					return wrappedResponse(_response, HTTP_STATUS_CODES.OK, { message: 'Polet normalniy!'});
+					return requestHandlerPut(_response, parsedUrl, requestBody)
 				}
 				case HTTP_METHODS.POST: {
 					return requestHandlerPost(_response, parsedUrl, requestBody)

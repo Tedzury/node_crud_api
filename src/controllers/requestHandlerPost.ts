@@ -7,7 +7,7 @@ import validateJSON from "../helpers/validateJson";
 import validateUser from "../helpers/validateUser";
 import { v4 as uuid } from 'uuid';
 
-const requestHandlerPost = async (_response: ServerResponse, _parsedUrl: string[], _requestBody: any) => {
+const requestHandlerPost = async (_response: ServerResponse, _parsedUrl: string[], _requestBody: string	) => {
 
 	if (_parsedUrl.length > 2) return wrappedResponse(_response, HTTP_STATUS_CODES.NOT_FOUND, { message: RESP_MSG.INVALID_ROUTE})
 

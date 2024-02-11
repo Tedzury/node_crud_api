@@ -4,6 +4,7 @@ import { HTTP_STATUS_CODES, RESP_MSG, HTTP_METHODS, INF_MSG } from '../shared/co
 import requestHandlerGet from './requestHandlerGet';
 import requestHandlerPost from './requestHandlerPost';
 import requestHandlerPut from './requestHandlerPut';
+import requestHandlerDelete from './requestHandlerDelete';
 
 const requestHandler = (_request: IncomingMessage, _response: ServerResponse, port: number | string) => {
 	try {
@@ -34,7 +35,7 @@ const requestHandler = (_request: IncomingMessage, _response: ServerResponse, po
 					return requestHandlerPost(_response, parsedUrl, requestBody)
 				}
 				case HTTP_METHODS.DELETE: {
-					return wrappedResponse(_response, HTTP_STATUS_CODES.OK, { message: 'Polet normalniy!'});
+					return requestHandlerDelete(_response, parsedUrl);
 				}
 				default: {
 					return requestHandlerGet(_response, parsedUrl)

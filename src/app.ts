@@ -25,8 +25,7 @@ const app = () => {
 
 			console.log(INF_MSG.MASTER_SERVER.replace('%pid%', process.pid.toString()).replace('%port%', port.toString()));
 
-			// const maxWorkers = availableParallelism() - 1;
-			const maxWorkers = 4;
+			const maxWorkers = availableParallelism() - 1;
 			const loadBalancer = new LoadBalancer(Number(port), maxWorkers);
 			const masterServer = getMasterServer(loadBalancer);
 

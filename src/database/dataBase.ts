@@ -4,12 +4,7 @@ import { RESP_MSG } from "../shared/constants";
 class FancyDataBase {
 	_usersStorage: DBUser[];
 	constructor() {
-		this._usersStorage = [{
-			id: '018f2e70-caed-4275-ae41-e2b06d81c4fa',
-			username: 'Alesha',
-			age: 29,
-			hobbies: ['tennis'],
-		}];
+		this._usersStorage = [];
 	}
 	saveUser (_newUser: DBUser)  {
 		this._usersStorage = [...this._usersStorage, _newUser];

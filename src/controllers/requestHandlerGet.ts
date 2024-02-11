@@ -2,7 +2,7 @@ import { ServerResponse, request } from 'http';
 import wrappedResponse from '../utils/wrappedResponse';
 import { HTTP_STATUS_CODES, RESP_MSG, DB_METHODS} from '../shared/constants';
 import dataBaseRequest from '../database/dataBaseRequest';
-import {validate as isUuidValid, v4 } from 'uuid';
+import {validate as isUuidValid} from 'uuid';
 import { ResponseData } from 'src/shared/types';
 
 

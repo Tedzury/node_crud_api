@@ -25,13 +25,12 @@ const requestHandler = (_request: IncomingMessage, _response: ServerResponse, po
 			requestBody += chunk;
 		});
 		_request.on('end', () => {
-			const parsedBody = (requestBody ? JSON.parse(requestBody) : null);
 			switch(method) {
 				case HTTP_METHODS.PUT: {
 					return wrappedResponse(_response, HTTP_STATUS_CODES.OK, { message: 'Polet normalniy!'});
 				}
 				case HTTP_METHODS.POST: {
-					return requestHandlerPost(_response, parsedUrl, parsedBody)
+					return requestHandlerPost(_response, parsedUrl, requestBody)
 				}
 				case HTTP_METHODS.DELETE: {
 					return wrappedResponse(_response, HTTP_STATUS_CODES.OK, { message: 'Polet normalniy!'});

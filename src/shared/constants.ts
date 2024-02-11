@@ -26,9 +26,11 @@ const INF_MSG = {
 const RESP_MSG = {
 	SERVER_ERROR: 'Internal server error happened. We are trying to figure out what have caused it.',
 	WRONG_METHOD: 'Such methods are not allowed while working with server. Only GET, POST, PUT and DELETE methods are allowed.',
-	INVALID_ROUTE: 'You are trying to reach route that doesn\'t exist. Try to use /api/users route.',
+	INVALID_ROUTE: 'You are trying to reach route that doesn\'t exist. Try to use /api/users route with GET and POST methods or /api/users/{userID} route with GET, PUT AND DELETE methods.',
 	INVALID_ID: 'You are trying to reach user with invalid ID.',
-	USER_NOT_FOUND: 'User with provided ID: %id% doesn\'t exist in database. Check provided ID;'
+	USER_NOT_FOUND: 'User with provided ID: %id% doesn\'t exist in database. Check provided ID;',
+	INVALID_JSON: 'You are trying to pass and invalid JSON in your request. Don\'t do that!',
+	INVALID_USER_FORMAT: 'The user you are trying to pass are not valid. User object must look like: { username: "Timmy", age: 15, hobbies: ["volleyball"]. }'
 }
 
 const DB_METHODS = {

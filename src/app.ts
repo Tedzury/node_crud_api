@@ -3,20 +3,23 @@ import getServer from './getServer';
 import getMasterServer from './getMasterServer';
 import cluster from 'cluster';
 import LoadBalancer from './utils/loadBalancer';
-import dontenv from 'dotenv';
+import dotenv from 'dotenv';
 import { INF_MSG } from './shared/constants'
 import { availableParallelism } from 'os';
-import database from './shared/dataBase';
+import getDataBaseServer from './database/getDatabaseServer';
 
-dontenv.config();
+dotenv.config();
 
 const port = process.env.PORT || 4000;
+const dbPort = process.env.DATABASE_PORT || 5000;
 const isMultiple = isMulti(process.argv);
 
 const app = () => {
 
-  if (cluster.isPrimary) {
+	if (cluster.isPrimary) {
 		console.log(INF_MSG.PRIM_PROC.replace('%pid%', process.pid.toString()));
+		const dataBaseServer = getDataBaseServer();
+		dataBaseServer.listen(dbPort);
 
     if (isMultiple) {
 

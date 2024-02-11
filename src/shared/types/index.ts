@@ -7,4 +7,9 @@ export type DBUser = {
 
 export type reqUser = Omit<DBUser, 'id'>;
 
-export type ResponseData = { data: DBUser } | { data: DBUser[] } | { message: string };
+type DbRespTypeUser = { data: DBUser };
+type DbRespTypeUsers = { data: DBUser[] };
+type DbRespTypeError = { message: string };
+
+
+export type ResponseData = DbRespTypeError | DbRespTypeUser | DbRespTypeUsers ;

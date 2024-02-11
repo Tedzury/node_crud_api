@@ -26,7 +26,17 @@ const INF_MSG = {
 const RESP_MSG = {
 	SERVER_ERROR: 'Internal server error happened. We are trying to figure out what have caused it.',
 	WRONG_METHOD: 'Such methods are not allowed while working with server. Only GET, POST, PUT and DELETE methods are allowed.',
-	INVALID_ROUTE: 'You are trying to reach route that doesn\'t exist. Try to use /api/users route.'
+	INVALID_ROUTE: 'You are trying to reach route that doesn\'t exist. Try to use /api/users route.',
+	INVALID_ID: 'You are trying to reach user with invalid ID.',
+	USER_NOT_FOUND: 'User with provided ID: %id% doesn\'t exist in database. Check provided ID;'
 }
 
-export { HTTP_METHODS, HTTP_STATUS_CODES, INF_MSG, RESP_MSG }
+const DB_METHODS = {
+	SAVE_USER: 'saveUser',
+	UPDATE_USER: 'updateUser',
+	GET_USER: 'getUser',
+	GET_ALL_USERS: 'getAllUsers',
+	DELETE_USER: 'deleteUser',
+}
+
+export { HTTP_METHODS, HTTP_STATUS_CODES, INF_MSG, RESP_MSG, DB_METHODS }

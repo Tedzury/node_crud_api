@@ -26,6 +26,7 @@ const getMasterServer = (loadBalancer: LoadBalancer) => {
 
 				const proxyRequest = request(options, async (proxyRes) => {
 					proxyRes.setEncoding('utf-8');
+					res.statusCode = proxyRes.statusCode;
 					proxyRes.pipe(res)
 				})
 				proxyRequest.write(requestData);

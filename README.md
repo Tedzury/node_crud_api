@@ -1,6 +1,49 @@
-Here is third task for RSSchool NodeJS course 2024Q1. Here is actual assignment and score calculation for this task:
+Here is third task for RSSchool [NodeJS course](https://rs.school/nodejs/) 2024Q1.
 
-# Assignment: CRUD API
+Here is link to the [task assignment](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/crud-api/assignment.md)
+And to the [score calculation](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/crud-api/score.md)
+
+TLDR: Task was to implement a simple CRUD api using only native NodeJS apis with a load balancing round Robin algorithm, with balancing requests to forked processes using Cluster api, and common database, that must be stored only in memory, not in file at filesystem. And as well, provide a tests for app functionality. That simple (or not).
+
+# STEPS TO GET IT TO WORK:
+
+1. Clone the repository:
+    ```
+    git clone https://github.com/Tedzury/node_crud_api
+    ```
+2. Enter the app folder:
+    ```
+    cd node_crud_api
+    ```
+3. Switch to the develop branch:
+    ```
+    git checkout develop
+    ```
+4. Install all needed dependencies:
+    ```
+    npm i
+    ```
+5. Make your own .env file as it looks like in .envExample
+
+6. To start it without load balancer, enter in CLI:
+    ```
+    npm run start:dev
+    ```
+7. To start it with load balancer, type:
+    ```
+    npm run start:multi
+    ```
+8. To start build process and init app in singlethreaded mode, enter:
+    ```
+    npm run start:prod
+    ```
+9. If you want to check tests, type:
+    ```
+    npm run test
+    ```
+## NB! Before running tests - shut down all started crud api processes, because it will cause a conflict !
+
+# Here is copy of task assignment, where you can see the details:
 
 ## Description
 
@@ -18,7 +61,7 @@ Your task is to implement simple CRUD API using in-memory database underneath.
 1. Implemented endpoint `api/users`:
     - **GET** `api/users` is used to get all persons
         - Server should answer with `status code` **200** and all users records
-    - **GET** `api/users/{userId}` 
+    - **GET** `api/users/{userId}`
         - Server should answer with `status code` **200** and record with `id === userId` if it exists
         - Server should answer with `status code` **400** and corresponding message if `userId` is invalid (not `uuid`)
         - Server should answer with `status code` **404** and corresponding message if record with `id === userId` doesn't exist
@@ -62,34 +105,68 @@ Your task is to implement simple CRUD API using in-memory database underneath.
     3. Third `DELETE` request addressed to `localhost:4003/api` deletes created user
     4. Fourth `GET` request addressed to `localhost:4001/api` should return **404** status code for created user
 
-# Scoring: CRUD API
 
-## Basic Scope
+# List of used dependencies:
 
-- **+10** The repository with the application contains a `Readme.md` file containing detailed instructions for installing, running and using the application
-- **+10** **GET** `api/users` implemented properly
-- **+10** **GET** `api/users/{userId}` implemented properly
-- **+10** **POST** `api/users` implemented properly
-- **+10** **PUT** `api/users/{userId}` implemented properly
-- **+10** **DELETE** `api/users/{userId}` implemented properly
-- **+6** Users are stored in the form described in the technical requirements
-- **+6** Value of `port` on which application is running is stored in `.env` file
+devDependencies:
 
-## Advanced Scope
-- **+30** Task implemented on Typescript 
-- **+10** Processing of requests to non-existing endpoints implemented properly
-- **+10** Errors on the server side that occur during the processing of a request should be handled and processed properly
-- **+10** Development mode: `npm` script `start:dev` implemented properly
-- **+10** Production mode: `npm` script `start:prod` implemented properly
+    "@tsconfig/node16": "^16.1.1"
 
-## Hacker Scope
-- **+30** There are tests for API (not less than **3** scenarios)
-- **+50** There is horizontal scaling for application with a **load balancer**
+    "@types/jest": "^29.5.12"
 
-## Forfeits
+    "@types/node": "^20.11.16"
 
-- **-95% of total task score** any external tools except `nodemon`, `dotenv`, `cross-env`, `typescript`, `ts-node`, `ts-node-dev`, `eslint` and its plugins, `webpack` and its plugins, `prettier` and it's plugins, `uuid`, `@types/*` as well as libraries used for testing
-- **-30% of total task score** Commits after deadline (except commits that affect only Readme.md, .gitignore, etc.)
-- **-20** Missing PR or its description is incorrect
-- **-20** No separate development branch
-- **-20** Less than 3 commits in the development branch, not including commits that make changes only to `Readme.md` or similar files (`tsconfig.json`, `.gitignore`, `.prettierrc.json`, etc.)    
+    "@types/uuid": "^9.0.8"
+
+    "@typescript-eslint/eslint-plugin": "^6.21.0"
+
+    "@typescript-eslint/parser": "^6.21.0"
+
+    "clean-webpack-plugin": "^4.0.0"
+
+    "eslint": "^8.56.0"
+
+    "eslint-config-prettier": "^9.1.0"
+
+    "eslint-config-standard-with-typescript": "^43.0.1"
+
+    "eslint-plugin-import": "^2.29.1"
+
+    "eslint-plugin-n": "^16.6.2"
+
+    "eslint-plugin-prettier": "^5.1.3"
+
+    "eslint-plugin-promise": "^6.1.1"
+
+    "jest": "^29.7.0"
+
+    "nodemon": "^3.0.3"
+
+    "prettier": "3.2.5"
+
+    "ts-jest": "^29.1.2"
+
+    "ts-loader": "^9.5.1"
+
+    "ts-node": "^10.9.1"
+
+    "ts-node-dev": "^2.0.0"
+
+    "tslib": "^2.6.2"
+
+    "typescript": "^5.3.3"
+
+    "webpack": "^5.90.1"
+
+    "webpack-cli": "^5.1.4
+
+
+dependencies:
+
+    "cross-env": "^7.0.3"
+
+    "dotenv": "^16.4.1"
+
+    "uuid": "^9.0.1
+
+

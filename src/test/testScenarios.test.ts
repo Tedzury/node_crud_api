@@ -1,5 +1,5 @@
 import getDataBaseServer from "../database/getDatabaseServer";
-import getServer from "../getServer";
+import getServer from "../servers/getServer";
 import { RESP_MSG } from "../shared/constants";
 
 const DB = getDataBaseServer();
@@ -66,7 +66,6 @@ describe('Testing scenario #1. Testing happy paths in the app.', () => {
 	});
 	test('Should successfully change data of user if new valid data is provided', async () => {
 		const { data } = await (await fetch(`http://localhost:4000/api/users/${userID}`, putRequestOptions)).json();
-		console.log(data);
 		const { username, age, hobbies } = data;
 		expect(username).toBe(putRequestBody.username);
 		expect(age).toBe(putRequestBody.age);
@@ -176,7 +175,6 @@ describe('Testing scenario #2.Testing basic validation of routes and methods in 
 			const { data } = await (await fetch(`http://localhost:4000/api/users/`, requestOptions("POST", normalUser))).json();
 			const { username, age, hobbies, id } = data;
 			userID = id;
-			console.log(id)
 			expect(username).toBe(normalUser.username);
 			expect(age).toBe(normalUser.age);
 			expect(hobbies[0]).toBe(normalUser.hobbies[0]);
@@ -187,8 +185,6 @@ describe('Testing scenario #2.Testing basic validation of routes and methods in 
 		});
 		test('If user tries to reach not existing user - he(she) receive appropriate message', async () => {
 			const invalidID = '11111'.concat(userID.slice(5));
-			console.log(userID);
-			console.log(invalidID);
 			const { message } = await (await fetch(`http://localhost:4000/api/users/${invalidID}`, requestOptions("PUT", updatedUser))).json();
 			expect(message).toBe(RESP_MSG.USER_NOT_FOUND.replace('%id%', invalidID));
 		});

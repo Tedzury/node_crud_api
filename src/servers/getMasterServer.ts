@@ -1,7 +1,7 @@
 import { createServer, request } from "http";
-import LoadBalancer from "./utils/loadBalancer";
-import { HTTP_STATUS_CODES, INF_MSG, RESP_MSG } from "./shared/constants";
-import wrappedResponse from "./utils/wrappedResponse";
+import LoadBalancer from "../utils/loadBalancer";
+import { HTTP_STATUS_CODES, INF_MSG, RESP_MSG } from "../shared/constants";
+import wrappedResponse from "../utils/wrappedResponse";
 
 const getMasterServer = (loadBalancer: LoadBalancer) => {
 	return createServer( async (req, res) => {

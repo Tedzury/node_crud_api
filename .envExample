@@ -1,0 +1,4 @@
+For the app usage you must create your own .env file. Or just delete this line and rename file to .env :)
+
+PORT=4000
+DATABASE_PORT=5000
